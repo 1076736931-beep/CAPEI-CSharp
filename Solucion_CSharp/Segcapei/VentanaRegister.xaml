@@ -1,0 +1,192 @@
+﻿<Window x:Class="Segcapei.VentanaRegister"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Segcapei"
+        mc:Ignorable="d"
+        Title="Registro de Usuario" Height="550" Width="400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize">
+
+    <Grid>
+        <!-- Fondo con gradiente -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FF58ACE2" Offset="0"/>
+                <GradientStop Color="#FF163B5F" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- Contenido principal -->
+        <Border Background="#AA000000" 
+                CornerRadius="15" 
+                Margin="30"
+                Padding="30">
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <!-- Título -->
+                    <TextBlock Text="REGISTRO" 
+                               FontSize="24" 
+                               FontWeight="Bold" 
+                               Foreground="White" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,0,0,25"/>
+
+                    <!-- Campo Nombre -->
+                    <TextBlock Text="Nombre Completo:" 
+                               Foreground="White" 
+                               FontSize="12" 
+                               Margin="0,0,0,5"/>
+                    <TextBox Name="TxtNombre" 
+                             Height="35" 
+                             FontSize="14"
+                             Padding="10,5"
+                             Margin="0,0,0,15"
+                             Background="#AA333333"
+                             Foreground="White"
+                             BorderBrush="#FF1599ED"
+                             BorderThickness="1"/>
+
+                    <!-- Campo Email -->
+                    <TextBlock Text="Correo Electrónico:" 
+                               Foreground="White" 
+                               FontSize="12" 
+                               Margin="0,0,0,5"/>
+                    <TextBox Name="TxtEmail" 
+                             Height="35" 
+                             FontSize="14"
+                             Padding="10,5"
+                             Margin="0,0,0,15"
+                             Background="#AA333333"
+                             Foreground="White"
+                             BorderBrush="#FF1599ED"
+                             BorderThickness="1"/>
+
+                    <!-- Campo Usuario -->
+                    <TextBlock Text="Nombre de Usuario:" 
+                               Foreground="White" 
+                               FontSize="12" 
+                               Margin="0,0,0,5"/>
+                    <TextBox Name="TxtUsername" 
+                             Height="35" 
+                             FontSize="14"
+                             Padding="10,5"
+                             Margin="0,0,0,15"
+                             Background="#AA333333"
+                             Foreground="White"
+                             BorderBrush="#FF1599ED"
+                             BorderThickness="1"/>
+
+                    <!-- Campo Contraseña -->
+                    <TextBlock Text="Contraseña:" 
+                               Foreground="White" 
+                               FontSize="12" 
+                               Margin="0,0,0,5"/>
+                    <PasswordBox Name="TxtPassword" 
+                                 Height="35" 
+                                 FontSize="14"
+                                 Padding="10,5"
+                                 Margin="0,0,0,15"
+                                 Background="#AA333333"
+                                 Foreground="White"
+                                 BorderBrush="#FF1599ED"
+                                 BorderThickness="1"/>
+
+                    <!-- Campo Confirmar Contraseña -->
+                    <TextBlock Text="Confirmar Contraseña:" 
+                               Foreground="White" 
+                               FontSize="12" 
+                               Margin="0,0,0,5"/>
+                    <PasswordBox Name="TxtConfirmPassword" 
+                                 Height="35" 
+                                 FontSize="14"
+                                 Padding="10,5"
+                                 Margin="0,0,0,25"
+                                 Background="#AA333333"
+                                 Foreground="White"
+                                 BorderBrush="#FF1599ED"
+                                 BorderThickness="1"/>
+
+                    <!-- Botones -->
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                Margin="0,10,0,0">
+
+                        <Button Name="BtnRegistrar" 
+                                Content="Registrar" 
+                                Width="100" 
+                                Height="40" 
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Background="#FF1599ED"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Margin="0,0,10,0"
+                                Cursor="Hand"
+                                Click="BtnRegistrar_Click">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+                                                        CornerRadius="8">
+                                                    <ContentPresenter HorizontalAlignment="Center" 
+                                                                      VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#FF0066CC"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <Button Name="BtnCancelar" 
+                                Content="Cancelar" 
+                                Width="100" 
+                                Height="40" 
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Background="Transparent"
+                                Foreground="White"
+                                BorderBrush="White"
+                                BorderThickness="2"
+                                Cursor="Hand"
+                                Click="BtnCancelar_Click">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="8">
+                                                    <ContentPresenter HorizontalAlignment="Center" 
+                                                                      VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="White"/>
+                                                        <Setter Property="Foreground" Value="Black"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>
