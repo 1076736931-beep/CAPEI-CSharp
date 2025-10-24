@@ -30,7 +30,7 @@
 
             <StackPanel Margin="40" VerticalAlignment="Center">
                 <!-- Título -->
-                <TextBlock Text="SEGCAPEI" 
+                <TextBlock Text="CAPEI" 
                            FontSize="28" 
                            FontWeight="Bold" 
                            Foreground="White" 

@@ -1,27 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Segcapei
 {
-    /// <summary>
-    /// Lógica de interacción para VentanaP.xaml
-    /// </summary>
     public partial class VentanaP : Window
     {
         public VentanaP()
         {
             InitializeComponent();
         }
+
+        #region Eventos de Navegación
+
+        private void BtnCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            var resultado = MessageBox.Show("¿Está seguro de que desea cerrar sesión?",
+                                            "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (resultado == MessageBoxResult.Yes)
+            {
+                MainWindow loginWindow = new MainWindow();
+                loginWindow.Show();
+                this.Close();
+            }
+        }
+
+        private void BtnDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Módulo 'Dashboard' en desarrollo.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void BtnUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Módulo 'Usuarios' en desarrollo.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void BtnGeneradorPasswords_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var ventanaGenerador = new VentanaGenerador
+                {
+                    Owner = this
+                };
+                ventanaGenerador.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al abrir el generador: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void BtnReportes_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Módulo 'Reportes' en desarrollo.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void BtnConfiguracion_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Módulo 'Configuración' en desarrollo.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        #endregion
     }
 }

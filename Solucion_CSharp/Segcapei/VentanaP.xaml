@@ -4,12 +4,141 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Segcapei"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="Segcapei - Panel Principal" Height="600" Width="900"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
 
+    <!-- ====== RECURSOS ====== -->
+    <Window.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#AA1599ED"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FF1599ED"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DropShadowEffect x:Key="CardShadow"
+                          Color="Black"
+                          Opacity="0.2"
+                          BlurRadius="10"
+                          ShadowDepth="3"/>
+    </Window.Resources>
+
+    <!-- ====== CONTENIDO PRINCIPAL ====== -->
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!-- Barra superior -->
+        <Border Grid.Row="0" Background="#FF2D4758">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Título -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0">
+                    <TextBlock Text="SEGCAPEI" FontSize="24" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock Text="Sistema de Gestión" FontSize="14" Foreground="#CCFFFFFF" Margin="20,0,0,0"/>
+                </StackPanel>
+
+                <!-- Botones usuario -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0">
+                    <Button Content="Configuración" Background="Transparent" Foreground="White" BorderThickness="0"
+                            Padding="15,10" Margin="0,0,10,0"/>
+                    <Button Content="Cerrar Sesión" Background="#AAFF0000" Foreground="White" BorderThickness="0"
+                            Padding="15,10" Cursor="Hand" Click="BtnCerrarSesion_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Cuerpo -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Panel lateral -->
+            <Border Grid.Column="0" Background="#FF2A3F54">
+                <StackPanel Margin="0,20">
+                    <Border Background="#FF4D7690" Margin="15" Padding="15" CornerRadius="8">
+                        <StackPanel>
+                            <Ellipse Width="60" Height="60" Fill="#FF1599ED" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Usuario" Foreground="White" FontSize="16" FontWeight="Bold"
+                                       HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                            <TextBlock Text="Administrador" Foreground="#CCFFFFFF" FontSize="12"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Text="MENÚ PRINCIPAL" Foreground="#AAFFFFFF" FontSize="12" FontWeight="Bold"
+                               Margin="20,20,20,10"/>
+                    <Button Content="📊 Dashboard" Style="{StaticResource MenuButtonStyle}" Click="BtnDashboard_Click"/>
+                    <Button Content="👥 Usuarios" Style="{StaticResource MenuButtonStyle}" Click="BtnUsuarios_Click"/>
+                    <Button Content="🔐 Generador de Contraseñas" Style="{StaticResource MenuButtonStyle}"
+                            Click="BtnGeneradorPasswords_Click"/>
+                    <Button Content="📋 Reportes" Style="{StaticResource MenuButtonStyle}" Click="BtnReportes_Click"/>
+                    <Button Content="⚙️ Configuración" Style="{StaticResource MenuButtonStyle}"
+                            Click="BtnConfiguracion_Click"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Contenido derecho -->
+            <Border Grid.Column="1" Background="#FF99B3C7" Padding="20">
+                <StackPanel Name="DefaultContent" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="¡Bienvenido a SEGCAPEI!" FontSize="32" FontWeight="Bold"
+                               Foreground="#FF2C3E50" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    <TextBlock Text="Seleccione una opción del menú lateral para comenzar."
+                               FontSize="16" Foreground="#FF7F8C8D" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Pie -->
+        <Border Grid.Row="2" Background="#FF34495E">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="© 2025 SEGCAPEI - Todos los derechos reservados"
+                           Foreground="#AAFFFFFF" VerticalAlignment="Center" Margin="20,0"/>
+                <TextBlock Grid.Column="1"
+                           Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}"
+                           Foreground="#AAFFFFFF" VerticalAlignment="Center" Margin="20,0"/>
+            </Grid>
+        </Border>
     </Grid>
-   
 </Window>
